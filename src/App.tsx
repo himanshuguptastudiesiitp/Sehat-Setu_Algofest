@@ -10,7 +10,7 @@ import AdminDashboard from './components/AdminDashboard';
 import EmergencyDirectory from './components/EmergencyDirectory';
 import LiveConsultation from './components/LiveConsultation';
 import HealthCheckLab from './components/HealthCheckLab';
-import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from '@clerk/react';
+import { SignInButton, SignUpButton, useAuth, UserButton } from '@clerk/react';
 
 const brandLogo = new URL('./assets/images/sehat_setu_logo_1780285261649.png', import.meta.url).href;
 
@@ -214,19 +214,7 @@ export default function App() {
 
           {/* Clerk Authentication Buttons */}
           <div className="flex items-center gap-2">
-            <SignedOut>
-              <SignInButton mode="modal">
-                <button className="px-4 py-2 text-sm font-bold text-[#0F9D58] border border-[#0F9D58] rounded-lg hover:bg-[#0F9D58]/10 transition-colors">
-                  Sign In
-                </button>
-              </SignInButton>
-              <SignUpButton mode="modal">
-                <button className="px-4 py-2 text-sm font-bold text-white bg-[#0F9D58] rounded-lg hover:bg-[#0F9D58]/90 transition-colors">
-                  Sign Up
-                </button>
-              </SignUpButton>
-            </SignedOut>
-            <SignedIn>
+            {useAuth().isSignedIn ? (
               <div className="flex items-center gap-3">
                 <span className="text-xs text-gray-600">My Account</span>
                 <UserButton 
@@ -238,7 +226,20 @@ export default function App() {
                   }}
                 />
               </div>
-            </SignedIn>
+            ) : (
+              <>
+                <SignInButton mode="modal">
+                  <button className="px-4 py-2 text-sm font-bold text-[#0F9D58] border border-[#0F9D58] rounded-lg hover:bg-[#0F9D58]/10 transition-colors">
+                    Sign In
+                  </button>
+                </SignInButton>
+                <SignUpButton mode="modal">
+                  <button className="px-4 py-2 text-sm font-bold text-white bg-[#0F9D58] rounded-lg hover:bg-[#0F9D58]/90 transition-colors">
+                    Sign Up
+                  </button>
+                </SignUpButton>
+              </>
+            )}
           </div>
         </div>
       </header>
