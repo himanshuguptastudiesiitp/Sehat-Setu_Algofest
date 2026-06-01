@@ -1,0 +1,6 @@
+{
+  "name": "Sehat Setu",
+  "description": "India's leading healthcare transparency and patient assistance platform, offering transparent hospital discovery, surgery cost intelligence, and AI healthcare support.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
